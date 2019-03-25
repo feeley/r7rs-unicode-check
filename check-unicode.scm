@@ -100,8 +100,8 @@
   (check-sfc "y\xdf;" "yss")
   (check-sfc "\xdf;y" "ssy")
   (check-sfc
-   "\xdf;_\x1e9e;_\xfb00;_\xfb01;_\xfb02;_\xfb03;_\xfb04;_\xfb05;_\xfb06;_\xfb13;_\xfb14;_\xfb15;_\xfb16;_\xfb17;"
-   "ss_ss_ff_fi_fl_ffi_ffl_st_st_\x574;\x576;_\x574;\x565;_\x574;\x56b;_\x57e;\x576;_\x574;\x56d;")
+   "\xdf;_\x1e9e;_\xa7ba;_\xfb00;_\xfb01;_\xfb02;_\xfb03;_\xfb04;_\xfb05;_\xfb06;_\xfb13;_\xfb14;_\xfb15;_\xfb16;_\xfb17;"
+   "ss_ss_\xa7bb;_ff_fi_fl_ffi_ffl_st_st_\x574;\x576;_\x574;\x565;_\x574;\x56b;_\x57e;\x576;_\x574;\x56d;")
 
   (check-cmp "" "" #t #f #f #t #t #t #f #f #t #t)
   (check-cmp "a" "" #f #f #t #f #t #f #f #t #f #t)

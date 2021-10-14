@@ -22,6 +22,35 @@
         (else
          (write x))))
 
+(define max-code-point #x10ffff)
+
+(define (private-use-character? n)
+  (or (and (>= n   #xe000) (<= n   #xf8ff))
+      (and (>= n  #xf0000) (<= n  #xffffd))
+      (and (>= n #x100000) (<= n #x10fffd))))
+
+(define (noncharacter? n)
+  (or (and (>= n #xfdd0) (<= n #xfdef))
+      (and (= #xfff (modulo (quotient n 16) #x1000))
+           (>= (modulo n 16) #xe))))
+
+(define (for-each-code-point proc)
+  (let loop ((i 0))
+    (if (<= i max-code-point)
+        (begin
+          (proc i)
+          (loop (+ i 1))))))
+
+(define count 0)
+
+(for-each-code-point (lambda (i)
+                       (if (noncharacter? i)
+                           (set! count (+ count 1)))))
+                     
+
+(println count)
+(exit)
+
 (let loop ((i 0))
   (if (< i 200000)
       (begin
@@ -47,6 +76,12 @@
               (print-value (char-downcase c))
               (display " ")
               (print-value (char-foldcase c))
+              (display " ")
+              (print-value (map char->integer
+                                (string->list (string-downcase (string c)))))
+              (display " ")
+              (print-value (map char->integer
+                                (string->list (string-upcase (string c)))))
               (display " ")
               (print-value (map char->integer
                                 (string->list (string-foldcase (string c)))))
